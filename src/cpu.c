@@ -230,6 +230,10 @@ void run_instruction(struct cpu_state *s) {
   // try instructions that don't fit the regular patterns first
   switch(opcode) {
 
+    case 0xcb: // wait
+      s->waiting = 1;
+      return;
+
     case 0x04: // tsb zp
       address = zeropage(s);
       temp = s->read(s->hardware, address);
